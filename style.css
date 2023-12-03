@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
-
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -47,7 +46,6 @@
 .navbar {
     background : linear-gradient(315deg, #ffffff, #d7e1ec);
 }
-
 .navbar a {
     position: relative;
     font-size: 16px;
@@ -56,8 +54,6 @@
     text-decoration: none;
     margin-left: 35px;
 }
-
-
 .navbar a::before {
     content: '';
     position: absolute;
@@ -68,7 +64,6 @@
     background: #fff;
     transition: .3s;
 }
-
 .navbar a:hover::before {
     width: 100%;
 } */

@@ -1,12 +1,18 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
+
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>BedbugMaps</title>
-    
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=y1lxlqdtw8">
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,15 +55,7 @@
     </div>
 
 
-
-
-    
-
-    
-    
-</body>
-
-<script>
+    <script>
         var mapOptions = {
             center: new naver.maps.LatLng(37.3595704, 127.105399),
             zoom: 10
@@ -70,43 +68,45 @@
             zoom: 15
         });
 
-        var marker = new naver.maps.Marker({
-            position: new naver.maps.LatLng(37.3595704, 127.105399),
-            map: map
-        });   
+    
+        $(document).ready(function() { //(jquery) html파일이 모두 로드되고 나면 수행
+            $.get("index.php", function(data){ //php파일 경로
+                db = data.split(':')
+                db.pop()
+                for (i=0; i<db.length; i++){
+                    info=db[i].split(';') //info[0]=address info[1]=lat info[2]=lng
+                }
+            });
+        });
 
-        var positions = [
-            {
-                title: "원주시청",
-                lntlng: new naver.maps.LatLng(37.342461, 127.920038)
-            }
-        ];
+        // $(document).ready(function(){
+        //     $.get("index.php",function(data){
+        //         console.log(data);
+        //     });
+        // });
+
+        // $(document).ready(function(){
+        //     console.log('start');
+        //         $.get("index.php",function(data){
+        //             console.log(data);
+        //         });
+        // })
         
-    <?
-        $sql = " select bindae_code, lat, lng, bindae_time from bedbug_maps";
-        $result = mysqli_query($db_link, $SQL);
-        $idx = 0;
-        while($row = mysqli_fetch_array($result))
-        {
-            $idx++;
-            if($row["bindae_time"])
-            {
-                $bindae_time_arr = explode(" ", $row["bindae_time"]);
-                $bindae_date = $bindae_time_arr[0];
-                $bindae_date = $bindae_time_arr[1];
-            }
-
-            $bindaeID = "bindae".$idx;
-            ?>
-                var marker<?=$idx?> = new CustomMarker(<?=$row["lat"]?>, <?=$row["lng"]?>, "<?=$bindaeID?>", "<?=$bindae_date?>");
-            <?
-        }
-    ?>
-
+   
 
 
 
 </script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+    
+
+    
+</body>
+
+
+
 
 </html>
