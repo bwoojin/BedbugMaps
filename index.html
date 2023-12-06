@@ -11,27 +11,97 @@
         <script src="MarkerClustering.js"></script> <!-- 마커 클러스터 js파일 -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+        <link rel="stylesheet" href="./style.css">
     </head>
 
 
     <body style="height: 100%;">
-        <div class="body"><div id="map" style="width:100%;height:100vh;">
-            
-        </div>
+    <div class="body"><div id="map" style="width:100%;height:100vh;">
+        <div class="header">
+            <div class="menu-btn">
+              <i class="fas fa-bars"></i>
+            </div>
+      
+            <div class="box_warp search_warp">
+              <input type="text" placeholder="충청북도 괴산군 괴산읍" />
+              <a href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </a>
+            </div>
+          </div>
+      
+          <div class="side-bar">
+            <div class="close-btn">
+              <i class="fas fa-times"></i>
+            </div>
+            <div class="side-bar-header">Bedbug<p>Map</p></div>
+            <div class="menu">
+              <div class="item">
+                <a href="./bindaeCurrentSituation.html" target="_self"><i class="fas fa-qrcode"></i>빈대 현황판</a>
+              </div>
+              <div class="item">
+                <a class="sub-btn"
+                  ><i class="fas fa-marker"></i>test<i
+                    class="fas fa-angle-right dropdown"
+                  ></i
+                ></a>
+                <div class="sub-menu">
+                  <a href="#" class="sub-item">Sub Item 0</a>
+                  <a href="#" class="sub-item">Sub Item 1</a>
+                  <a href="#" class="sub-item">Sub Item 2</a>
+                </div>
+              </div>
+              <div class="item">
+                <a href="#"><i class="fas fa-tents"></i>test</a>
+              </div>
+              <div class="item">
+                <a class="sub-btn"
+                  ><i class="fas fa-forward-step"></i>test<i
+                    class="fas fa-angle-right dropdown"
+                  ></i
+                ></a>
+                <div class="sub-menu">
+                  <a href="#" class="sub-item">Sub Item 0</a>
+                  <a href="#" class="sub-item">Sub Item 1</a>
+                  <a href="#" class="sub-item">Sub Item 2</a>
+                </div>
+              </div>
+              <div class="item">
+                <a href="#"><i class="fas fa-quidditch"></i>test</a>
+              </div>
+            </div>
+          </div>
+          <div class="side-bg"></div>
+    </div>
 
+    <!-- Link To Custom JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+      // for toggle sub menus
+      $(document).ready(function () {
+        $(".sub-btn").click(function () {
+          $(this).next(".sub-menu").slideToggle();
+          $(this).find(".dropdown").toggleClass("rotate");
+        });
+        // for expend/collapse sidebar
+        $(".menu-btn").click(function () {
+          $(".side-bar").addClass("active");
+          $(".menu-btn").css("visibility", "hidden");
+          $(".side-bg").addClass("active");
+        });
 
-
-
-
-
-
-
-
-
-
-         <script>
+        $(".close-btn").click(function () {
+          $(".side-bar").removeClass("active");
+          $(".menu-btn").css("visibility", "visible");
+          $(".side-bg").removeClass("active");
+        });
+      });
+    </script>
+    
+        <script>
             var mapOptions = {
                 center: new naver.maps.LatLng(36.3595704, 127.105399),
                 zoom: 8
