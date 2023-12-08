@@ -114,7 +114,7 @@
                 $.get("index.php", function(data){ //php파일 경로
                     db = data.split(':')
                     db.pop()
-                    console.log
+                    console.log()
                     for (i=0; i<db.length; i++){
                         info=db[i].split(';') //info[0]=address info[1]=lat info[2]=lng
                         var marker = new naver.maps.Marker({
