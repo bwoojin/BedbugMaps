@@ -122,6 +122,7 @@ header {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  color: #0f0f0f;
 }
 
 .nav_wrapper .name::before {
@@ -141,6 +142,10 @@ header {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+.nav_wrapper a {
+  color: var(--main--color);
 }
 
 #menu-icon {
@@ -348,4 +353,102 @@ header {
 
 .bedbug-information2 {
   margin: 0 0 5rem;
+}
+
+/* news */
+
+#News {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.news-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.news-header span {
+  color: var(--second-color);
+  font-weight: bolder;
+}
+
+.news-header h3 {
+  font-size: 2.4rem;
+  color: var(--main--color);
+}
+
+.news-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+  flex-wrap: warp;
+}
+
+.news-box {
+  width: 380px;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  margin: 20px;
+}
+
+.news-img {
+  width: 100%;
+  height: auto;
+}
+
+.news-img iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 10;
+}
+
+.news-text {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-text span {
+  color: var(--main--color);
+  font-size: 0.9rem;
+}
+
+.news-text .news-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--second-color);
+}
+
+.news-text .news-title:hover {
+  color: var(--main--color);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.news-text p {
+  color: #9b9b9b;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 20px 0px;
+}
+
+.news-text a {
+  color: #0f0f0f;
+}
+
+.news-text a:hover {
+  color: var(--main--color);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
