@@ -207,7 +207,7 @@
 
             var markers = []; //DB에서 마커 불러올때 markers.push(marker<?/*=$idx*/?>); 
             $(document).ready(function() { //(jquery) html파일이 모두 로드되고 나면 수행
-                $.get("https://port-9000-bedbugmaps-php-57lz2alpqndu5u.sel4.cloudtype.app/", function(data){ //php파일 경로
+                $.get("./index.php", function(data){ //php파일 경로
                     db = data.split(':')
                     db.pop()
                     console.log()
