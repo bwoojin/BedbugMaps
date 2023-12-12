@@ -28,18 +28,18 @@
       >
       <div class="bx bx-menu" id="menu-icon"></div>
       <ul class="navbar">
-        <li><a href="#">빈대보드 집계</a></li>
-        <li><a href="#">빈대 개요 및 증상</a></li>
-        <li><a href="#">TEST</a></li>
-        <li><a href="#">TEST</a></li>
-        <li><a href="#">TEST</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToSection('total')">빈대보드 집계</a></li>
+        <li><a href="javascript:void(1)" onclick="scrollToSection('information')">빈대 개요 및 예방</a></li>
+        <li><a href="javascript:void(2)" onclick="scrollToSection('News')">빈대 주요 뉴스</a></li>
+        <li><a href="javascript:void(3)" onclick="scrollToSection('section-id')">Comeing Soon...</a></li>
+        <li><a href="javascript:void(4)" onclick="scrollToSection('section-id')">Comeing Soon...</a></li>
       </ul>
     </header>
     <nav class="navbar2">
       <ul class="nav_wrapper"><a href="https://docs.google.com/forms/d/e/1FAIpQLScQJ7RPxNC4mvA5B5O0Q1oHhlJ08jDYEz4DVgq1l7D3lgH78Q/viewform">
           <li class="icon test_icon_name1">
               <span class="name">빈대신고</span>
-              <span><i class="bx bx-mail-send"></i></span>
+              <span><i class="bx bx-bug"></i></span>
           </li>
         </a> 
       </ul>
@@ -259,6 +259,33 @@
     </section>
     <!-- Link To Custom JS -->
     <script src="page.js"></script>
+
+    <script>
+      function scrollToSection(total) {
+        var section = document.getElementById(total);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          }
+      }
+    </script>
+
+    <script>
+      function scrollToSection(information) {
+        var section = document.getElementById(information);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    </script>
+
+    <script>
+      function scrollToSection(News) {
+        var section = document.getElementById(News);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    </script>
 
     <script>
       var mapOptions = {
