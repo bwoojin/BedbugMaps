@@ -28,7 +28,7 @@
       >
       <div class="bx bx-menu" id="menu-icon"></div>
       <ul class="navbar">
-      <li><a href="javascript:void(0)" onclick="scrollToSection('total')">빈대보드 집계</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToSection('total')">빈대보드 집계</a></li>
         <li><a href="javascript:void(1)" onclick="scrollToSection('information')">빈대 개요 및 예방</a></li>
         <li><a href="javascript:void(2)" onclick="scrollToSection('News')">빈대 주요 뉴스</a></li>
         <li><a href="javascript:void(3)" onclick="scrollToSection('section-id')">Comeing Soon...</a></li>
@@ -36,11 +36,12 @@
       </ul>
     </header>
     <nav class="navbar2">
-      <ul class="nav_wrapper">
+      <ul class="nav_wrapper"><a href="https://docs.google.com/forms/d/e/1FAIpQLScQJ7RPxNC4mvA5B5O0Q1oHhlJ08jDYEz4DVgq1l7D3lgH78Q/viewform" target="_blank">
           <li class="icon test_icon_name1">
               <span class="name">빈대신고</span>
               <span><i class="bx bx-bug"></i></span>
           </li>
+        </a> 
       </ul>
     </nav>
     <!-- Home -->
@@ -201,7 +202,6 @@
         </div>
       </div>
     </section>
-
     <div class="Section_line"></div>
     <!-- News -->
     <section id="News">
@@ -257,7 +257,6 @@
         </div>
       </div>
     </section>
-
     <!-- Link To Custom JS -->
     <script src="page.js"></script>
 
@@ -287,6 +286,13 @@
         }
       }
     </script>
-        
+
+    <script>
+      var mapOptions = {
+        center: new naver.maps.LatLng(35.3, 127.5),
+        zoom: 1,
+      };
+      var map = new naver.maps.Map("map", mapOptions); // id와 option
+    </script>
   </body>
 </html>
