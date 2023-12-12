@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <title>BedbugMaps</title>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=y1lxlqdtw8"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	      <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=y1lxlqdtw8&submodules=geocoder"></script>
         <script src="MarkerClustering.js"></script> <!-- 마커 클러스터 js파일 -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,9 +32,9 @@
             </div>
       
             <div class="box_warp search_warp">
-              <input type="text" placeholder="빈대 출몰 현황 지도 검색" />
+              <input id="address" type="text" placeholder="주소를 입력해주세요." />
               <a href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" id="submit"></i>
               </a>
             </div>
           </div>
@@ -46,48 +46,49 @@
             <div class="side-bar-header">Bedbug<p>Map</p></div>
             <div class="menu">
               <div class="item">
-                <a href="./bindaeCurrentSituation.html" target="_self"><i class="fas fa-qrcode"></i>빈대 현황판</a>
-              </div>
-              <div class="item">
                 <a class="sub-btn"
-                  ><i class="fas fa-marker"></i>test<i
+                  ><i class="fas fa-qrcode"></i>빈대 현황판 메뉴<i
                     class="fas fa-angle-right dropdown"
                   ></i
                 ></a>
                 <div class="sub-menu">
-                  <a href="#" class="sub-item">Sub Item 0</a>
-                  <a href="#" class="sub-item">Sub Item 1</a>
-                  <a href="#" class="sub-item">Sub Item 2</a>
+                  <a href="/bindaeCurrentSituation.html#total" class="sub-item">빈대현황판 집계</a>
+                  <a href="/bindaeCurrentSituation.html#information" class="sub-item">빈대 개요 및 예방</a>
+                  <a href="/bindaeCurrentSituation.html#News" class="sub-item">빈대 관련 NEWS</a>
                 </div>
               </div>
               <div class="item">
-                <a href="#"><i class="fas fa-tents"></i>test</a>
+                <a href="#"><i class="fas fa-tents"></i>Comeing Soon</a>
               </div>
               <div class="item">
                 <a class="sub-btn"
-                  ><i class="fas fa-forward-step"></i>test<i
+                  ><i class="fas fa-forward-step"></i>Comeing Soon<i
                     class="fas fa-angle-right dropdown"
                   ></i
                 ></a>
                 <div class="sub-menu">
-                  <a href="#" class="sub-item">Sub Item 0</a>
-                  <a href="#" class="sub-item">Sub Item 1</a>
-                  <a href="#" class="sub-item">Sub Item 2</a>
+                  <a href="#" class="sub-item">Comeing Soon</a>
+                  <a href="#" class="sub-item">Comeing Soon</a>
+                  <a href="#" class="sub-item">Comeing Soon</a>
                 </div>
               </div>
               <div class="item">
-                <a href="#"><i class="fas fa-quidditch"></i>test</a>
+                <a href="#"><i class="fas fa-quidditch"></i>Comeing Soon</a>
               </div>
             </div>
           </div>
           <div class="side-bg"></div>
-    </div>
-    <nav class="navbar2">
-      <ul class="nav_wrapper">
-          <li class="icon test_icon_name1">
-              <span class="name">빈대신고</span>
-              <span><i class="bx bx-mail-send"></i></span>
+          <table>
+            <tbody id="mapList"></tbody>
+          </table>
+          </div>
+          <nav class="navbar2">
+            <ul class="nav_wrapper"><a href="https://docs.google.com/forms/d/e/1FAIpQLScQJ7RPxNC4mvA5B5O0Q1oHhlJ08jDYEz4DVgq1l7D3lgH78Q/viewform">
+              <li class="icon test_icon_name1">
+                <span class="name">빈대신고</span>
+              <span><i class="bx bx-bug"></i></span>
           </li>
+        </a> 
       </ul>
     </nav>
     <!-- Link To Custom JS -->
@@ -114,6 +115,88 @@
       });
     </script>
     
+          <script>
+            //지도를 그려주는 함수 실행
+            selectMapList();
+
+            //검색한 주소의 정보를 insertAddress 함수로 넘겨준다.
+            function searchAddressToCoordinate(address) {
+              naver.maps.Service.geocode(
+                {
+                  query: address,
+                },
+                function (status, response) {
+                  if (status === naver.maps.Service.Status.ERROR) {
+                    return alert("Something Wrong!");
+                  }
+                  if (response.v2.meta.totalCount === 0) {
+                    return alert("올바른 주소를 입력해주세요.");
+                  }
+                  var htmlAddresses = [],
+                    item = response.v2.addresses[0],
+                    point = new naver.maps.Point(item.x, item.y);
+                  if (item.roadAddress) {
+                    htmlAddresses.push("[도로명 주소] " + item.roadAddress);
+                  }
+                  if (item.jibunAddress) {
+                    htmlAddresses.push("[지번 주소] " + item.jibunAddress);
+                  }
+                  if (item.englishAddress) {
+                    htmlAddresses.push("[영문명 주소] " + item.englishAddress);
+                  }
+
+                  insertAddress(item.roadAddress, item.x, item.y);
+                }
+              );
+            }
+
+            // 주소 검색의 이벤트
+            $("#address").on("keydown", function (e) {
+              var keyCode = e.which;
+              if (keyCode === 13) {
+                // Enter Key
+                searchAddressToCoordinate($("#address").val());
+              }
+            });
+            $("#submit").on("click", function (e) {
+              e.preventDefault();
+              searchAddressToCoordinate($("#address").val());
+            });
+            naver.maps.Event.once(map, "init_stylemap", initGeocoder);
+
+            //검색정보를 테이블로 작성해주고, 지도에 마커를 찍어준다.
+            function insertAddress(address, latitude, longitude) {
+              $("#mapList").append(mapList);
+
+              var map = new naver.maps.Map("map", {
+                center: new naver.maps.LatLng(longitude, latitude),
+                zoom: 15
+              });
+            }
+
+            //지도를 그려주는 함수
+            function selectMapList() {
+              var map = new naver.maps.Map("map", {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 10,
+              });
+            }
+
+            // 지도를 이동하게 해주는 함수
+            function moveMap(len, lat) {
+              var mapOptions = {
+                center: new naver.maps.LatLng(len, lat),
+                zoom: 15,
+                mapTypeControl: true,
+              };
+              var map = new naver.maps.Map("map", mapOptions);
+              var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(len, lat),
+                map: map,
+              });
+            }
+          </script>
+
         <script>
             var mapOptions = {
                 center: new naver.maps.LatLng(36.3595704, 127.105399),
